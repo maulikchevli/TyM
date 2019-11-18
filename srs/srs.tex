@@ -96,6 +96,7 @@ This document is primarily intended for developers and project managers who want
 TyM software will enable its users to generate Machine Learning Models without implementing them. With the help of the GUI provided by our software, the user will be able to select the ML model he wants and give the data as input on which he wants to train the ML model on. Our software will give suggestions on whether the data overfit or underfit, will show graphical representations and also give the model which the user can download. TyM is for those users who do not have the time for implementing ML models but want to use one. TyM is also for developers who want to see how a ML model fits on the data without implementing them.
 
 \section{References}
+TODO
 $<$List any other documents or Web addresses to which this SRS refers. These may 
 include user interface style guides, contracts, standards, system requirements 
 specifications, use case documents, or a vision and scope document. Provide 
@@ -106,16 +107,10 @@ including title, author, version number, date, and source or location.$>$
 \chapter{Overall Description}
 
 \section{Product Perspective}
-$<$Describe the context and origin of the product being specified in this SRS.  
-For example, state whether this product is a follow-on member of a product 
-family, a replacement for certain existing systems, or a new, self-contained 
-product. If the SRS defines a component of a larger system, relate the 
-requirements of the larger system to the functionality of this software and 
-identify interfaces between the two. A simple diagram that shows the major 
-components of the overall system, subsystem interconnections, and external 
-interfaces can be helpful.$>$
+The software TyM is self contained and has no relation to any existing software whatsoever. This is the first version of the software and hence has been developed from scratch.
 
 \section{Product Functions}
+TODO
 $<$Summarize the major functions the product must perform or must let the user 
 perform. Details will be provided in Section 3, so only a high level summary 
 (such as a bullet list) is needed here. Organize the functions to make them 
@@ -124,43 +119,19 @@ related requirements and how they relate, such as a top level data flow diagram
 or object class diagram, is often effective.$>$
 
 \section{User Classes and Characteristics}
-$<$Identify the various user classes that you anticipate will use this product.  
-User classes may be differentiated based on frequency of use, subset of product 
-functions used, technical expertise, security or privilege levels, educational 
-level, or experience. Describe the pertinent characteristics of each user class.  
-Certain requirements may pertain only to certain user classes. Distinguish the 
-most important user classes for this product from those who are less important 
-to satisfy.$>$
+Tym software will be used by two types of users: premium users and normal users. Premium users will have more ML models to choose from and will get more insight. Normal users will have the option to upgrade to premium. Normal users can try out the software and, if they want to, can become premium users.
 
 \section{Operating Environment}
-$<$Describe the environment in which the software will operate, including the 
-hardware platform, operating system and versions, and any other software 
-components or applications with which it must peacefully coexist.$>$
+Since our software will be deployed over the web, there are no constraints on hardware and the OS. However, TyM software could be only run on Chrome (version 60 or higher) and Mozilla Firefox (version 56 or higher).
 
 \section{Design and Implementation Constraints}
-$<$Describe any items or issues that will limit the options available to the 
-developers. These might include: corporate or regulatory policies; hardware 
-limitations (timing requirements, memory requirements); interfaces to other 
-applications; specific technologies, tools, and databases to be used; parallel 
-operations; language requirements; communications protocols; security 
-considerations; design conventions or programming standards (for example, if the 
-customer’s organization will be responsible for maintaining the delivered 
-software).$>$
+Tym Software will work only on Chrome (version 60 or higher) and Mozilla Firefox (version 56 or higher). This software was built using HTML5 and Bootstrap for Frontend and flask for backend. ML libraries like sklearn and tensorflow have been used for implementing Machine Learning models. SQL database has been used for storing the user data and their models. All the Backend part has been implemented in Python language.
 
 \section{User Documentation}
-$<$List the user documentation components (such as user manuals, on-line help, 
-and tutorials) that will be delivered along with the software. Identify any 
-known user documentation delivery formats or standards.$>$
-\section{Assumptions and Dependencies}
+A user manual will be provided with the TyM software. It would contain detailed descriptions of the functionalities of the software, how the user would interact with the software and what additional things are available to the premium users.
 
-$<$List any assumed factors (as opposed to known facts) that could affect the 
-requirements stated in the SRS. These could include third-party or commercial 
-components that you plan to use, issues around the development or operating 
-environment, or constraints. The project could be affected if these assumptions 
-are incorrect, are not shared, or change. Also identify any dependencies the 
-project has on external factors, such as software components that you intend to 
-reuse from another project, unless they are already documented elsewhere (for 
-example, in the vision and scope document or the project plan).$>$
+\section{Assumptions and Dependencies}
+Tym software would be dependent on Machine Learning libraries sklearn and tensorflow provided by Python as we will be using these libraries to implement the ML models. Also, it would be dependent on Flask library for backend purposes.
 
 
 \chapter{External Interface Requirements}

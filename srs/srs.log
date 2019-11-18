@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.12)  18 NOV 2019 15:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.12)  18 NOV 2019 16:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -437,17 +437,17 @@ chapter 5.
 
 ] [12]
 chapter 6.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 308.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 279.
 [13
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 308.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 279.
  (./srs.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 308.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 308.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 279.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 279.
 Package rerunfilecheck Info: File `srs.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 308.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 279.
  ) 
 Here is how much of TeX's memory you used:
  9146 strings out of 492616
@@ -462,7 +462,7 @@ Here is how much of TeX's memory you used:
 </usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
 /usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
 sr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb>
-Output written on srs.pdf (13 pages, 90256 bytes).
+Output written on srs.pdf (13 pages, 89416 bytes).
 PDF statistics:
  275 PDF objects out of 1000 (max. 8388607)
  252 compressed objects within 3 object streams
