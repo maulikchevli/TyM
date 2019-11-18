@@ -1,0 +1,10 @@
+.DS_Store
+
+# Tex files
+*.toc
+*.aux
+*.log
+*.out
+*.pdf
+*.synctex.gz
+
