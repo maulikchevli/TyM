@@ -164,11 +164,11 @@ If the user wants to generate, test and find related models using TyM software, 
 
 \subsection{Functional Requirements}
 \begin{enumerate}
-\item Display of Registration form
-\item Get user details from user
-\item Check details in database
-\item If username already exists, then display error message. Ask user for another username.
-\item If not, then create entry in database and welcome user.
+\item Registration Form is to be displayed.
+\item User details is to be taken as input from the user.
+\item Details are to be checked in the database.
+\item Error message is to be displayed if username already exists.
+\item Entry is to be created in the database if no error occurs.
 \end{enumerate}
 
 \section{User Login}
@@ -181,9 +181,9 @@ If the user wants to generate, test and find related models using TyM software, 
 
 \subsection{Functional Requirements}
 \begin{enumerate}
-\item Display of Login form
-\item Get username and password from user
-\item Check details in database
+\item Login form is to be displayed.
+\item Username and password is to be taken as input from the user.
+\item Details are checked in the database.
 \item If username and password matched in database, user is logged in.
 \item If not, then error message is displayed.
 \end{enumerate}
@@ -198,10 +198,10 @@ After user logs in, the home page is displayed to him. The home page would consi
 
 \subsection{Functional Requirements}
 \begin{enumerate}
-\item Select Generate ML model option in the home page.
-\item Get Model choice from user.
-\item Get Algorithm choice from user.
-\item Get parameters for algorithm selected.
+\item Generate ML model option is to be selected.
+\item Model choice is to be taken as input from the user.
+\item Algorithm choice is to be taken as input from the user.
+\item Parameters for algorithm selected is to be taken as input from the user.
 \item Get training data from user.
 \item ML model is generated at backend.
 \item Model is saved and stored in database.
@@ -217,12 +217,12 @@ This feature allows the user to select a Machine Learning model from his history
 
 \subsection{Functional Requirements}
 \begin{enumerate}
-\item Select Test ML model option in the home page.
-\item If ML model exists, select the model.
-\item Else, Generate the model.
-\item Get test data from user.
-\item ML model is tested at backend.
-\item Give insight to user.
+\item Test ML model option is to be selected
+\item ML Model is to be selected from the history section, if the model already exists. 
+\item Else, the model is to be generated.
+\item Test data is to be taken as input from the user.
+\item ML model is to be tested at backend.
+\item Insight is displayed to the user.
 \end{enumerate}
 
 \section{History}
