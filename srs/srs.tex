@@ -96,12 +96,7 @@ This document is primarily intended for developers and project managers who want
 TyM software will enable its users to generate Machine Learning Models without implementing them. With the help of the GUI provided by our software, the user will be able to select the ML model he wants and give the data as input on which he wants to train the ML model on. Our software will give suggestions on whether the data overfit or underfit, will show graphical representations and also give the model which the user can download. TyM is for those users who do not have the time for implementing ML models but want to use one. TyM is also for developers who want to see how a ML model fits on the data without implementing them.
 
 \section{References}
-TODO
-$<$List any other documents or Web addresses to which this SRS refers. These may 
-include user interface style guides, contracts, standards, system requirements 
-specifications, use case documents, or a vision and scope document. Provide 
-enough information so that the reader could access a copy of each reference, 
-including title, author, version number, date, and source or location.$>$
+None
 
 
 \chapter{Overall Description}
@@ -110,13 +105,15 @@ including title, author, version number, date, and source or location.$>$
 The software TyM is self contained and has no relation to any existing software whatsoever. This is the first version of the software and hence has been developed from scratch.
 
 \section{Product Functions}
-TODO
-$<$Summarize the major functions the product must perform or must let the user 
-perform. Details will be provided in Section 3, so only a high level summary 
-(such as a bullet list) is needed here. Organize the functions to make them 
-understandable to any reader of the SRS. A picture of the major groups of 
-related requirements and how they relate, such as a top level data flow diagram 
-or object class diagram, is often effective.$>$
+The functionalities provided by TyM software are as follows: 
+\begin{itemize}
+\item Register: This feature is for registering an account.
+\item Login: This is for logging in.
+\item Generate Machine Learning model: This is for generating a ML model the user wants to implement.
+\item Test Machine Learning Model: This is for testing the Machine Learning model and for providing insight.
+\item Get History: Fetch the ML models the user has implemented in the past.
+\item Get Related Models: Fetch ML models implemented by other users 
+\end{itemize}
 
 \section{User Classes and Characteristics}
 Tym software will be used by two types of users: premium users and normal users. Premium users will have more ML models to choose from and will get more insight. Normal users will have the option to upgrade to premium. Normal users can try out the software and, if they want to, can become premium users.
@@ -268,7 +265,7 @@ The PC (or Laptop) on which the software is running should have good internet co
 To ensure that the users of our software have good user experience and no losses of data occur, TyM software is updated by our developer team regularly. Users, if they encounter any bug while using this software, they can report the bug to us through our feedback form and our developer team would rectify it as as soon as possible. Also users should have strong passwords, consisting of both uppercase and lowercase letters, numbers and special characters. 
 
 \section{Security Requirements}
-All the user data and application data are stored in encrypted form so that the data is safe and secure. Passwords are hashed and stored to provide additional security. Even if the system crashes, we have data backups and a good disaster recovery plan.
+All the user data and application data are stored in encrypted form so that the data is safe and secure. Passwords are hashed and stored to provide additional security. Even if the system crashes, we have data backups and a good disaster recovery plan. Our Security team is consistently looking for bugs in the software and rectifying them.
 
 \section{Software Quality Attributes}
 TyM software provides users with simple and advanced features. With our clean and easy to use GUI, the software can be used by both developers and normal users. With additional insights provided by our software for the ML model implemented, users and developers can understand whether the ML model is performing well or not. However, the user should know how to navigate a typical website. Also, the input given by the user should be proper for the ML model to perform well.
@@ -278,25 +275,20 @@ There are two types of user: normal users and premium users. If a user is a prem
 
 
 \chapter{Other Requirements}
-$<$Define any other requirements not covered elsewhere in the SRS. This might 
-include database requirements, internationalization requirements, legal 
-requirements, reuse objectives for the project, and so on. Add any new sections 
-that are pertinent to the project.$>$
 
 \section{Appendix A: Glossary}
-%see https://en.wikibooks.org/wiki/LaTeX/Glossary
-$<$Define all the terms necessary to properly interpret the SRS, including 
-acronyms and abbreviations. You may wish to build a separate glossary that spans 
-multiple projects or the entire organization, and just include terms specific to 
-a single project in each SRS.$>$
+Some terms required to understand this SRS document: 
+\begin{enumerate}
+\item Machine Learning: Machine learning is an application of artificial intelligence (AI) that provides systems the ability to automatically learn and improve from experience without being explicitly programmed. Machine learning focuses on the development of computer programs that can access data and use it learn for themselves.
+\item Training Data: Training data is used to train an algorithm. Generally, training data is a certain percentage of an overall dataset along with testing set. As a rule, the better the training data, the better the algorithm or classifier performs.
+\item Test Data: Test data is the data that is used in tests of a software system.When test data is entered the expected result should come and some test data is used to verify the software behavior to invalid input data.
+\item Python: Python is a high-level programming language designed to be easy to read and simple to implement. It is open source, which means it is free to use, even for commercial applications.
+\end{enumerate}
 
 \section{Appendix B: Analysis Models}
 $<$Optionally, include any pertinent analysis models, such as data flow 
 diagrams, class diagrams, state-transition diagrams, or entity-relationship 
 diagrams.$>$
 
-\section{Appendix C: To Be Determined List}
-$<$Collect a numbered list of the TBD (to be determined) references that remain 
-in the SRS so they can be tracked to closure.$>$
 
 \end{document}
