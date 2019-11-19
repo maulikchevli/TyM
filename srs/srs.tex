@@ -235,27 +235,28 @@ This features allows the user to see the details of the past ML models he had ge
 
 \subsection{Functional Requirements}
 \begin{enumerate}
-\item Select History option in the home page.
-\item Check Models section for that user in database
-\item Retrieve models from database
-\item Display to user
+\item History option should be available to all users.
+\item To retrieve models, database connection should be active.
+\item Database should provide data with integrity.
+\item The history should be displayed with a usable GUI.
 \end{enumerate}
 
 \section{Related Models}
 
 \subsection{Description and Priority}
-The user would select the ML model choice and then ML models implemented by different users would be displayed according to the choice given by the user. Details of all the ML models would be displayed. Priority will be medium for this feature.
+This feature is only availabe to pro users.
+The user would select the ML model choice and then ML models implemented by different users would be displayed according to the algorithms used in the model given by the user. Details of all the ML models would be displayed. Priority will be medium for this feature.
 
 \subsection{Stimulus/Response Sequences}
- There will be the button for related model section on the home page. On selected, he would be directed to a page where the details of each ML model implemented by different users would be displayed to the user.
+ There will be the button for related model section on the home page for pro users. On selection, he would be directed to a page where the details of each ML model implemented by different users would be displayed to the user.
 
 \subsection{Functional Requirements}
 \begin{enumerate}
-\item Select Related Models option in the home page.
-\item Get Machine Learning Model choice from the user.
-\item Check Models section in database.
-\item Retrieve models from database.
-\item Display to user.
+\item Related models option should be availabe to pro users only.
+\item The user should be able to select his previous model.
+\item To retrieve models, database connection should be active.
+\item The user should already have generated models.
+\item The display should be in a nice and usable way.
 \end{enumerate}
 
 
