@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+{% endblock %}
+{% block jscript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">TyM</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    {% if logged == False %}
+      <div class="nav-item">
+        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+      </div>
+    {%endif%}
+
+    {% if logged == True %}
+      <div class="nav-item">
+        Welcome {{ username }}
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+      </div>
+    {%endif%}
+
+    <div class="nav-item">
+      <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+    </div>
+
+    <div class="nav-item">
+      <a class="nav-link" href="{{ url_for('model_choice') }}">Choose Model Choice</a>
+    </div>
+
+
+  </div>
+</nav>
+{% endblock %}
+
+{% block middle %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
