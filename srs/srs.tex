@@ -16,6 +16,7 @@
 %http://www.se.rit.edu/~emad/teaching/slides/srs_template_sep14.pdf
 %http://karlwiegers.com
 \documentclass{scrreprt}
+\usepackage[final]{pdfpages}
 \usepackage{listings}
 \usepackage{underscore}
 \usepackage[bookmarks=true]{hyperref}
@@ -56,7 +57,7 @@
         \vspace{1.9cm}
         \LARGE{Version \myversion approved}\\
         \vspace{1.9cm}
-        Prepared by $Harsh Surti, Maulik Chevli, and Suprit Bhattacharjee$\\
+        Prepared by \\ Harsh Surti, Maulik Chevli, and Suprit Bhattacharjee\\
         \vspace{1.9cm}
         $Coding Cult$\\
         \vspace{1.9cm}
@@ -296,5 +297,19 @@ $<$Optionally, include any pertinent analysis models, such as data flow
 diagrams, class diagrams, state-transition diagrams, or entity-relationship 
 diagrams.$>$
 
+\includepdf[pages=-,pagecommand={}]{../p/FSM.pdf}
+\includepdf[pages=-,pagecommand={}]{../p/ad.pdf}
+
+\includepdf[pages=-,pagecommand={}]{../p/uc.pdf}
+\includepdf[pages=-,pagecommand={}]{../p/s1.pdf}
+\includepdf[pages=-,pagecommand={}]{../p/s2.pdf}
+\includepdf[pages=-,pagecommand={}]{../p/s3.pdf}
+\includepdf[pages=-,pagecommand={}]{../p/s4.pdf}
+\includepdf[pages=-,pagecommand={}]{../p/s5.pdf}
+
+\includepdf[pages=-,pagecommand={}]{../p/context.pdf}
+\includepdf[pages=-,pagecommand={}]{../p/dfd.pdf}
+
+\includepdf[pages=-,pagecommand={}]{../p/er.pdf}
 
 \end{document}
