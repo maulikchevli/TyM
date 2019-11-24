@@ -13,6 +13,10 @@
 {% block middle %}
 
 <form method="POST" action="{{ url_for('linear_regression_parameters') }}" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="name">Name of Model: </label>
+    <input name="model_name" class="form-control" placeholder="Enter Name of Model" required>
+  </div>
   <div class="custom-file">
     <input type="file" class="custom-file-input" name="training_data">
     <label class="custom-file-label" for="training_data">Choose file</label>
