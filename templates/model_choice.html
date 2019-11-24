@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Model Choice{% endblock %}
+
+
+
+{% block header %}
+
+{% include 'main_header.html' %}
+
+
+{% endblock %}
+
+{% block middle %}
+
+<form method="POST" action="{{ url_for('model_choice') }}">
+  <div class="radio">
+  <label><input type="radio" name="model_choice" value="regression" checked>Regression</label>
+</div>
+<div class="radio">
+  <label><input type="radio" name="model_choice" value="classification">Classification</label>
+</div>
+<div class="radio">
+  <label><input type="radio" name="model_choice" value="clustering">Clustering</label>
+</div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

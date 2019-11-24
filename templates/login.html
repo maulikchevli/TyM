@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+
+
+{% block header %}
+
+{% include 'main_header.html' %}
+
+
+{% endblock %}
+
+{% block middle %}
+
+<form method="POST" action="{{ url_for('login') }}">
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" name="email" class="form-control" placeholder="Enter email" required>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" name="password" class="form-control" placeholder="Password" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

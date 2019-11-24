@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Regression Choice{% endblock %}
+
+
+
+{% block header %}
+
+{% include 'main_header.html' %}
+
+
+{% endblock %}
+
+{% block middle %}
+
+<form method="POST" action="{{ url_for('regression_choice') }}">
+  <div class="radio">
+  <label><input type="radio" name="regression_choice" value="linear_regression" checked>Linear Regression</label>
+</div>
+<div class="radio">
+  <label><input type="radio" name="regression_choice" value="polynomial_regression">Polynomial Regression</label>
+</div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
