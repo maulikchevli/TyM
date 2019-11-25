@@ -117,9 +117,13 @@ def register():
                     registered = False
                     alreadyUser = True
                 else:
+                    print("inserting")
                     cur.execute("INSERT INTO users (fullname,address,username,email,password) VALUES (?,?,?,?,?)",(fullname,address,username,email,password))
+                    print("inserted")
                     con.commit()
+                    print("comitted")
                     msg = "Record successfully added"
+                    print(msg)
                     uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],username)
                     pickle_dir = os.path.join(app.config['PICKLE_FOLDER'],username)
                     os.mkdir(uploads_dir)
@@ -149,7 +153,7 @@ def test_model(model_id):
 			cur = con.cursor()
 			cur.execute("SELECT * FROM ml_models WHERE id=?",(model_id,))
 			model = cur.fetchone()
-		return render_template('test_model.html', model=model,flag=0)
+		return render_template('test_model.html', model=model)
 	else:
 		file = request.files['test_data']
 		with sql.connect("database.db") as con:
@@ -159,7 +163,7 @@ def test_model(model_id):
 			model = cur.fetchone()
 		accuracy = TestModelFunction(model['filename'],file)
 		model['accuracy'] = accuracy
-		return render_template('test_model.html',model=model,flag=1)
+		return render_template('test_result.html',model=model)
 
 @app.route('/model_choice',methods = ['POST','GET'])
 def model_choice():
