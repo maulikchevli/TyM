@@ -151,7 +151,14 @@ def test_model(model_id):
 			model = cur.fetchone()
 		return render_template('test_model.html', model=model)
 	else:
-		pass
+		file = request.form['test_data']
+		with sql.connect("database.db") as con:
+			con.row_factory = dict_factory
+			cur = con.cursor()
+			cur.execute("SELECT * FROM ml_models WHERE id=?",(model_id,))
+			model = cur.fetchone()
+		TestLinearRegression(model['filename'],file)
+		return "hello"
 
 @app.route('/model_choice',methods = ['POST','GET'])
 def model_choice():
