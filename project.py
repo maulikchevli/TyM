@@ -151,14 +151,15 @@ def test_model(model_id):
 			model = cur.fetchone()
 		return render_template('test_model.html', model=model)
 	else:
-		file = request.form['test_data']
+		file = request.files['test_data']
 		with sql.connect("database.db") as con:
 			con.row_factory = dict_factory
 			cur = con.cursor()
 			cur.execute("SELECT * FROM ml_models WHERE id=?",(model_id,))
 			model = cur.fetchone()
-		TestLinearRegression(model['filename'],file)
-		return "hello"
+		accuracy = TestModelFunction(model['filename'],file)
+		model['accuracy'] = accuracy
+		return render_template('test_result.html',model=model)
 
 @app.route('/model_choice',methods = ['POST','GET'])
 def model_choice():
@@ -245,27 +246,16 @@ def LinearRegressionImplementation(model_name,file):
     return model_filename
 
 
-def TestLinearRegression(pickle_filename,file):
+def TestModelFunction(pickle_filename,file):
     model_algo = "linear_regression"
-    uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],session['username'])
-    dataset = pandas.read_csv(os.path.join(uploads_dir,file))
+    dataset = pandas.read_csv(file)
     x = dataset.iloc[:, :-1].values
     y = dataset.iloc[:, -1].values
-    linearRegressor = LinearRegression()
-    
-    
-    
-    y_pred = linearRegressor.predict(x)
-    pm = metrics.mean_absolute_error(y, y_pred)
-    print('Mean Absolute Error:', pm)
-    print('Mean Squared Error:', metrics.mean_squared_error(y, y_pred))
-    print('Root Mean Squared Error:', numpy.sqrt(metrics.mean_squared_error(y, y_pred)))
-    with sql.connect("database.db") as con:
-        con.row_factory = dict_factory
-        cur = con.cursor()
-        cur.execute("INSERT INTO ml_models (username,model_name,model_algo,filename,performance_measure) VALUES (?,?,?,?,?)",(session['username'],model_name,model_algo,model_filename,str(pm)))
-        con.commit()
-    return model_filename
+    pickle_dir = os.path.join(app.config['PICKLE_FOLDER'],session['username'])
+    pickle_file= os.path.join(pickle_dir,str(pickle_filename))
+    f = open(pickle_file,"rb")
+    pickle_model = pickle.load(f)
+    return pickle_model.score(x,y)
 
 @app.route('/history')
 def history():
