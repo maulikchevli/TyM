@@ -1,5 +1,6 @@
 import os
 import time
+import calendar
 import datetime
 from flask_paginate import Pagination, get_page_parameter
 import sqlite3 as sql
@@ -139,6 +140,19 @@ def register():
             elif alreadyUser:
                     return redirect(url_for('index'))
 
+@app.route('/test_model/<model_id>', methods=['POST', 'GET'])
+def test_model(model_id):
+	if request.method == 'GET':
+		username = session['username']
+		with sql.connect("database.db") as con:
+			con.row_factory = dict_factory
+			cur = con.cursor()
+			cur.execute("SELECT * FROM ml_models WHERE id=?",(model_id,))
+			model = cur.fetchone()
+		return render_template('test_model.html', model=model)
+	else:
+		pass
+
 @app.route('/model_choice',methods = ['POST','GET'])
 def model_choice():
     if request.method == "GET":
@@ -188,7 +202,12 @@ def linear_regression_parameters():
         file = request.files['training_data']
         model_name = request.form['model_name']
         if file:
+            ts = calendar.timegm(time.gmtime())
             filename = secure_filename(file.filename)
+            temp_index=filename.find(".")
+            temp_filename=filename[0:temp_index]
+            extension=filename[temp_index:]
+            filename=temp_filename+str(ts)+extension
             uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],session['username'])
             file.save(os.path.join(uploads_dir,filename))
             model_filename = LinearRegressionImplementation(model_name,filename)
@@ -202,7 +221,8 @@ def LinearRegressionImplementation(model_name,file):
     y = dataset.iloc[:, -1].values
     linearRegressor = LinearRegression()
     linearRegressor.fit(x, y)
-    model_filename = model_name + '.sav'
+    ts = calendar.timegm(time.gmtime())
+    model_filename = model_name+str(ts) + '.sav'
     pickle_dir = os.path.join(app.config['PICKLE_FOLDER'],session['username'])
     pickle.dump(linearRegressor, open((os.path.join(pickle_dir,model_filename)), 'wb'))
     y_pred = linearRegressor.predict(x)
@@ -273,7 +293,12 @@ def logistic_regression_parameters():
         model_name = request.form['model_name']
         max_iter = request.form['max_iter']
         if file:
+            ts = calendar.timegm(time.gmtime())
             filename = secure_filename(file.filename)
+            temp_index=filename.find(".")
+            temp_filename=filename[0:temp_index]
+            extension=filename[temp_index:]
+            filename=temp_filename+str(ts)+extension
             uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],session['username'])
             file.save(os.path.join(uploads_dir,filename))
             model_filename = LogisticRegressionImplementation(model_name,filename,int(max_iter))
@@ -288,7 +313,8 @@ def LogisticRegressionImplementation(model_name,file,max_iter):
     print(y)
     classifier = LogisticRegression(max_iter=max_iter)
     classifier.fit(x, y)
-    model_filename = model_name + '.sav'
+    ts = calendar.timegm(time.gmtime())
+    model_filename = model_name+str(ts) + '.sav'
     pickle_dir = os.path.join(app.config['PICKLE_FOLDER'],session['username'])
     pickle.dump(classifier, open((os.path.join(pickle_dir,model_filename)), 'wb'))
     y_pred = classifier.predict(x)
