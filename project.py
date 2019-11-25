@@ -275,7 +275,12 @@ def logistic_regression_parameters():
         model_name = request.form['model_name']
         max_iter = request.form['max_iter']
         if file:
+            ts = calendar.timegm(time.gmtime())
             filename = secure_filename(file.filename)
+            temp_index=filename.find(".")
+            temp_filename=filename[0:temp_index]
+            extension=filename[temp_index:]
+            filename=temp_filename+str(ts)+extension
             uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],session['username'])
             file.save(os.path.join(uploads_dir,filename))
             model_filename = LogisticRegressionImplementation(model_name,filename,int(max_iter))
