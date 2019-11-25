@@ -22,6 +22,15 @@ PICKLE_FOLDER = './pickle'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['PICKLE_FOLDER'] = PICKLE_FOLDER
 
+def login_required(f):
+	@wraps(f)
+	def fn( *args, **kwargs):
+		if 'username' not in session:
+			session["flashErr"] = "Please login first!"
+			return redirect( url_for('login'))
+		return f( *args, **kwargs)
+	return fn
+
 
 def dict_factory(cursor,row):
     d = {}
@@ -74,6 +83,7 @@ def login():
 
 
 @app.route('/logout')
+@login_required
 def logout():
     session.pop('username',None)
     return redirect(url_for('index'))
@@ -130,6 +140,7 @@ def register():
                     return redirect(url_for('index'))
 
 @app.route('/model_choice',methods = ['POST','GET'])
+@login_required
 def model_choice():
     if request.method == "GET":
         return render_template('model_choice.html')
@@ -144,6 +155,7 @@ def model_choice():
 
 
 @app.route('/regression_choice',methods = ['POST','GET'])
+@login_required
 def regression_choice():
     if request.method == "GET":
         return render_template('regression_choice.html')
@@ -153,16 +165,19 @@ def regression_choice():
             return render_template('linear_regression_parameters.html')
 
 @app.route('/classification_choice',methods = ['POST','GET'])
+@login_required
 def classification_choice():
     if request.method == "GET":
         return render_template('classification_choice.html')
 
 @app.route('/clustering_choice',methods = ['POST','GET'])
+@login_required
 def clustering_choice():
     if request.method == "GET":
         return render_template('clustering_choice.html')
 
 @app.route('/linear_regression_parameters',methods=['POST','GET'])
+@login_required
 def linear_regression_parameters():
     if request.method == "GET":
         return render_template('linear_regression_parameters.html')
