@@ -295,10 +295,8 @@ def LogisticRegressionImplementation(model_name,file,max_iter):
     pickle_dir = os.path.join(app.config['PICKLE_FOLDER'],session['username'])
     pickle.dump(classifier, open((os.path.join(pickle_dir,model_filename)), 'wb'))
     y_pred = classifier.predict(x)
-    pm = metrics.mean_absolute_error(y, y_pred)
-    print('Mean Absolute Error:', pm)
-    print('Mean Squared Error:', metrics.mean_squared_error(y, y_pred))
-    print('Root Mean Squared Error:', numpy.sqrt(metrics.mean_squared_error(y, y_pred)))
+    pm = metrics.accuracy_score(y, y_pred)
+    print("Accuracy:",pm)
     with sql.connect("database.db") as con:
         con.row_factory = dict_factory
         cur = con.cursor()
