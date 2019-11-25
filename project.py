@@ -139,6 +139,10 @@ def register():
             elif alreadyUser:
                     return redirect(url_for('index'))
 
+@app.route('/test_model/<model_id>', methods=['POST', 'GET'])
+def test_model(model_id):
+	return "Test model"
+
 @app.route('/model_choice',methods = ['POST','GET'])
 def model_choice():
     if request.method == "GET":
