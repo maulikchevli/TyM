@@ -20,8 +20,10 @@
   </thead>
   <tbody>
     {% for model in models %}
+    <tr>
     <td>{{ model['model_name'] }}</td>
     <td>{{ model['model_algo'] }}</td>
+  </tr>
     {% endfor %}
   </tbody>
 </table>
