@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Model Choice{% endblock %}
+
+
+
+{% block header %}
+
+{% include 'main_header.html' %}
+
+
+{% endblock %}
+
+{% block middle %}
+
+<form method="POST" action="#">
+  <div class="radio" style="margin: 10px 0px 0px 20px;">
+  <label><input type="radio" name="related_model_choice" value="linear_regression" checked>Linear Regression</label>
+</div>
+<div class="radio" style="margin: 10px 0px 0px 20px;">
+  <label><input type="radio" name="related_model_choice" value="logistic_regression">Logistic Regression</label>
+</div>
+<div class="radio" style="margin: 10px 0px 0px 20px;">
+  <label><input type="radio" name="related_model_choice" value="clustering">Clustering</label>
+</div>
+  <button type="submit" class="btn btn-primary" style="margin: 10px 0px 0px 20px;">Submit</button>
+</form>
+
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}List Of Models{% endblock %}
+
+{% block css %}
+<style type="text/css">
+td
+{
+  width: 30%;
+  padding: 10px;
+}
+
+</style>
+
+{% endblock %}
+
+{% block header %}
+
+{% include 'main_header.html' %}
+
+
+{% endblock %}
+
+{% block middle %}
+<p></p>
+<table class="table table-responsice-lg table-bordered table-hover table-striped">
+  <thead>
+    <tr>
+      <td> <b>Model Name</b> </td>
+      <td><b>Accuracy</b></td>
+    </tr>
+  </thead>
+  <tbody>
+    {%for i in model_list%}
+
+        <tr>
+
+        <td><a href="{{ url_for('model_info', model_id=i['id']) }}">  {{i['model_name']}} </a> </td>
+        <td> {{i['performance_measure']}} </td>
+        </tr>
+    {%endfor%}
+</tbody>
+</table>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

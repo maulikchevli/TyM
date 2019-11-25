@@ -378,6 +378,18 @@ def KMeansImplementation(model_name,file,max_iter,n_clusters):
         con.commit()
     return model_filename
 
+@app.route('/related_model_option',methods=['POST','GET'])
+def related_model_option():
+    if request.method=="GET":
+        return render_template('related_model_option.html')
+    else:
+        choice=request.form['related_model_choice']
+        with sql.connect("database.db") as con:
+            con.row_factory = dict_factory
+            cur = con.cursor()
+            cur.execute("SELECT * FROM ml_models WHERE model_algo=?",(choice,))
+            model_list = cur.fetchall()
+        return render_template('list_related_model.html',model_list=model_list)
 
 if __name__ == "__main__":
     app.run(debug=True)

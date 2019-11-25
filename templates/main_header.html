@@ -38,9 +38,9 @@
 	    </div>
     {% endif %}
 
-    {% if pro == False %}
+    {% if pro == True %}
       <div class="nav-item">
-        <a class="nav-link" href="#">Related Models</a>
+        <a class="nav-link" href="{{ url_for('related_model_option') }}">Related Models</a>
       </div>
     {% endif %}
 
