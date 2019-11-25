@@ -13,13 +13,13 @@
 {% block middle %}
 
 <form method="POST" action="{{ url_for('regression_choice') }}">
-  <div class="radio">
+  <div class="radio" style="margin: 10px 0px 0px 20px;">
   <label><input type="radio" name="regression_choice" value="linear_regression" checked>Linear Regression</label>
 </div>
-<div class="radio">
+<div class="radio" style="margin: 10px 0px 0px 20px;">
   <label><input type="radio" name="regression_choice" value="polynomial_regression">Polynomial Regression</label>
 </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" style="margin: 10px 0px 0px 20px;">Submit</button>
 </form>
 
 

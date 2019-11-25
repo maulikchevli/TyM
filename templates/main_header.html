@@ -43,8 +43,18 @@
       </div>
     {%endif%}
 
+    {% if logged==False %}
+	    <div class="nav-item">
+	      <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+	    </div>
+	{%endif%}
+
     <div class="nav-item">
       <a class="nav-link" href="{{ url_for('model_choice') }}">Choose Model Choice</a>
+    </div>
+
+    <div class="nav-item">
+      <a class="nav-link" href="{{ url_for('history') }}">History</a>
     </div>
 
 
