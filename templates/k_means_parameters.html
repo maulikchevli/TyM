@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}K means Parameters{% endblock %}
+
+
+
+{% block header %}
+
+{% include 'main_header.html' %}
+
+
+{% endblock %}
+
+{% block middle %}
+
+<form method="POST" action="{{ url_for('k_means_parameters') }}" enctype="multipart/form-data">
+  <div class="form-group" style="margin: 10px 20px 0px 20px;">
+    <label for="name">Name of Model: </label>
+    <input name="model_name" class="form-control" placeholder="Enter Name of Model" required>
+  </div>
+  <div class="form-group" style="margin: 10px 20px 0px 20px;">
+    <label for="max_iter">Max number of iterations: </label>
+    <input name="max_iter" class="form-control" placeholder="Enter Max number of iterations" required>
+  </div>
+  <div class="form-group" style="margin: 10px 20px 0px 20px;">
+    <label for="n_clusters">Number of Clusters: </label>
+    <input name="n_clusters" class="form-control" placeholder="Enter number of clusters" required>
+  </div>
+  <div class="custom-file" style="margin: 10px 20px 0px 20px;width: 97%">
+    <input type="file" class="custom-file-input" name="training_data">
+    <label class="custom-file-label" for="training_data">Choose file</label>
+  </div>
+  <button type="submit" class="btn btn-primary" style="margin: 10px 20px 0px 20px;">Submit</button>
+</form>
+
+<script>
+// Add the following code if you want the name of the file appear on select
+$(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+</script>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

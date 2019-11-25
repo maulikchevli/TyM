@@ -14,6 +14,7 @@ import pandas
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
+from sklearn.cluster import KMeans
 from sklearn import metrics
 import pickle
 
@@ -188,6 +189,10 @@ def classification_choice():
 def clustering_choice():
     if request.method == "GET":
         return render_template('clustering_choice.html')
+    else:
+        clustering_choice = request.form['clustering_choice']
+        if clustering_choice == "k_means":
+            return render_template('k_means_parameters.html')
 
 @app.route('/linear_regression_parameters',methods=['POST','GET'])
 def linear_regression_parameters():
@@ -319,6 +324,49 @@ def LogisticRegressionImplementation(model_name,file,max_iter):
         con.row_factory = dict_factory
         cur = con.cursor()
         cur.execute("INSERT INTO ml_models (username,model_name,model_algo,filename,performance_measure) VALUES (?,?,?,?,?)",(session['username'],model_name,model_algo,model_filename,str(pm)))
+        con.commit()
+    return model_filename
+
+@app.route('/k_means_parameters',methods=['POST','GET'])
+@login_required
+def k_means_parameters():
+    if request.method == "GET":
+        return render_template('k_means_parameters.html')
+    else:
+        file = request.files['training_data']
+        model_name = request.form['model_name']
+        max_iter = request.form['max_iter']
+        n_clusters = request.form['n_clusters']
+        if file:
+            filename = secure_filename(file.filename)
+            uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],session['username'])
+            file.save(os.path.join(uploads_dir,filename))
+            model_filename = KMeansImplementation(model_name,filename,int(max_iter),int(n_clusters))
+            return redirect(url_for('index'))
+
+def KMeansImplementation(model_name,file,max_iter,n_clusters):
+    model_algo = "k_means"
+    uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],session['username'])
+    dataset = pandas.read_csv(os.path.join(uploads_dir,file))
+    X = dataset.iloc[:, :-1].values
+    X = pandas.DataFrame(X)
+    X = X.convert_objects(convert_numeric=True)
+
+    for i in X.columns:
+        X[i] = X[i].fillna(int(X[i].mean()))
+    for i in X.columns:
+        print(X[i].isnull().sum())
+
+    kmeans = KMeans(n_clusters=n_clusters,init='k-means++',max_iter=max_iter,n_init=10,random_state=0)
+    kmeans.fit(X)
+    model_filename = model_name + '.sav'
+    pickle_dir = os.path.join(app.config['PICKLE_FOLDER'],session['username'])
+    pickle.dump(kmeans, open((os.path.join(pickle_dir,model_filename)), 'wb'))
+    pm = "NA"
+    with sql.connect("database.db") as con:
+        con.row_factory = dict_factory
+        cur = con.cursor()
+        cur.execute("INSERT INTO ml_models (username,model_name,model_algo,filename,performance_measure) VALUES (?,?,?,?,?)",(session['username'],model_name,model_algo,model_filename,pm))
         con.commit()
     return model_filename
 
