@@ -225,6 +225,16 @@ def history():
         print(models)
         return render_template('history.html',models=models)
 
+@app.route('/model_info/<model_id>')
+def model_info(model_id):
+        username = session['username']
+        with sql.connect("database.db") as con:
+                con.row_factory = dict_factory
+                cur = con.cursor()
+                cur.execute("SELECT * FROM ml_models WHERE id=?",(model_id,))
+                model = cur.fetchone()
+
+                return render_template('model_info.html', model=model)
 
 
 if __name__ == "__main__":

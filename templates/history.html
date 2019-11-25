@@ -21,9 +21,11 @@
   <tbody>
     {% for model in models %}
     <tr>
-    <td>{{ model['model_name'] }}</td>
-    <td>{{ model['model_algo'] }}</td>
-  </tr>
+        <td><a href="{{ url_for('model_info', model_id=model['id']) }}">
+            {{ model['model_name'] }}
+        </a></td>
+        <td>{{ model['model_algo'] }}</td>
+    </tr>
     {% endfor %}
   </tbody>
 </table>
