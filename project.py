@@ -227,9 +227,7 @@ def TestLinearRegression(model_name,file):
     x = dataset.iloc[:, :-1].values
     y = dataset.iloc[:, -1].values
     linearRegressor = LinearRegression()
-    model_filename = model_name + '.sav'
-    pickle_dir = os.path.join(app.config['PICKLE_FOLDER'],session['username'])
-    pickle.dump(linearRegressor, open((os.path.join(pickle_dir,model_filename)), 'wb'))
+    
     y_pred = linearRegressor.predict(x)
     pm = metrics.mean_absolute_error(y, y_pred)
     print('Mean Absolute Error:', pm)
