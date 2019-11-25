@@ -117,9 +117,13 @@ def register():
                     registered = False
                     alreadyUser = True
                 else:
+                    print("inserting")
                     cur.execute("INSERT INTO users (fullname,address,username,email,password) VALUES (?,?,?,?,?)",(fullname,address,username,email,password))
+                    print("inserted")
                     con.commit()
+                    print("comitted")
                     msg = "Record successfully added"
+                    print(msg)
                     uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],username)
                     pickle_dir = os.path.join(app.config['PICKLE_FOLDER'],username)
                     os.mkdir(uploads_dir)
@@ -151,7 +155,15 @@ def test_model(model_id):
 			model = cur.fetchone()
 		return render_template('test_model.html', model=model)
 	else:
-		pass
+		file = request.files['test_data']
+		with sql.connect("database.db") as con:
+			con.row_factory = dict_factory
+			cur = con.cursor()
+			cur.execute("SELECT * FROM ml_models WHERE id=?",(model_id,))
+			model = cur.fetchone()
+		accuracy = TestModelFunction(model['filename'],file)
+		model['accuracy'] = accuracy
+		return render_template('test_result.html',model=model)
 
 @app.route('/model_choice',methods = ['POST','GET'])
 def model_choice():
@@ -238,27 +250,16 @@ def LinearRegressionImplementation(model_name,file):
     return model_filename
 
 
-def TestLinearRegression(model_name,file):
+def TestModelFunction(pickle_filename,file):
     model_algo = "linear_regression"
-    uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],session['username'])
-    dataset = pandas.read_csv(os.path.join(uploads_dir,file))
+    dataset = pandas.read_csv(file)
     x = dataset.iloc[:, :-1].values
     y = dataset.iloc[:, -1].values
-    linearRegressor = LinearRegression()
-    model_filename = model_name + '.sav'
     pickle_dir = os.path.join(app.config['PICKLE_FOLDER'],session['username'])
-    pickle.dump(linearRegressor, open((os.path.join(pickle_dir,model_filename)), 'wb'))
-    y_pred = linearRegressor.predict(x)
-    pm = metrics.mean_absolute_error(y, y_pred)
-    print('Mean Absolute Error:', pm)
-    print('Mean Squared Error:', metrics.mean_squared_error(y, y_pred))
-    print('Root Mean Squared Error:', numpy.sqrt(metrics.mean_squared_error(y, y_pred)))
-    with sql.connect("database.db") as con:
-        con.row_factory = dict_factory
-        cur = con.cursor()
-        cur.execute("INSERT INTO ml_models (username,model_name,model_algo,filename,performance_measure) VALUES (?,?,?,?,?)",(session['username'],model_name,model_algo,model_filename,str(pm)))
-        con.commit()
-    return model_filename
+    pickle_file= os.path.join(pickle_dir,str(pickle_filename))
+    f = open(pickle_file,"rb")
+    pickle_model = pickle.load(f)
+    return pickle_model.score(x,y)
 
 @app.route('/history')
 def history():
