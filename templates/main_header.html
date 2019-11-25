@@ -16,7 +16,7 @@
 
 {% block header %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="http://127.0.0.1:5000/">TyM</a>
+  <a class="navbar-brand" href="{{ url_for('index') }}">TyM</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -27,6 +27,11 @@
       <div class="nav-item">
         <a class="nav-link" href="{{ url_for('login') }}">Login</a>
       </div>
+
+	<div class="nav-item">
+	  <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+	</div>
+
     {%endif%}
 
     {% if logged == True %}
