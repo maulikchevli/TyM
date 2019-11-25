@@ -17,8 +17,8 @@ import pickle
 
 app = Flask(__name__)
 app.secret_key = "super secret key"
-UPLOAD_FOLDER = './uploads'
-PICKLE_FOLDER = './pickle'
+UPLOAD_FOLDER = './static/uploads'
+PICKLE_FOLDER = './static/pickle'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['PICKLE_FOLDER'] = PICKLE_FOLDER
 

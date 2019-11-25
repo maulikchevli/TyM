@@ -27,6 +27,11 @@
       <div class="nav-item">
         <a class="nav-link" href="{{ url_for('login') }}">Login</a>
       </div>
+
+	<div class="nav-item">
+	  <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+	</div>
+
     {%endif%}
 
     {% if logged == True %}
@@ -37,10 +42,6 @@
         <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
       </div>
     {%endif%}
-
-    <div class="nav-item">
-      <a class="nav-link" href="{{ url_for('register') }}">Register</a>
-    </div>
 
     <div class="nav-item">
       <a class="nav-link" href="{{ url_for('model_choice') }}">Choose Model Choice</a>
