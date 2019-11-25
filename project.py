@@ -149,7 +149,7 @@ def test_model(model_id):
 			cur = con.cursor()
 			cur.execute("SELECT * FROM ml_models WHERE id=?",(model_id,))
 			model = cur.fetchone()
-		return render_template('test_model.html', model=model)
+		return render_template('test_model.html', model=model,flag=0)
 	else:
 		file = request.files['test_data']
 		with sql.connect("database.db") as con:
@@ -159,7 +159,7 @@ def test_model(model_id):
 			model = cur.fetchone()
 		accuracy = TestModelFunction(model['filename'],file)
 		model['accuracy'] = accuracy
-		return render_template('test_result.html',model=model)
+		return render_template('test_model.html',model=model,flag=1)
 
 @app.route('/model_choice',methods = ['POST','GET'])
 def model_choice():

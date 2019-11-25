@@ -16,6 +16,14 @@
   <button type="submit" class="btn btn-primary" style="margin: 10px 0px 0px 20px;">Submit</button>
 </form>
 
+{% if flag == 1 %}
+
+	<div class="form-group" style="margin-left: 2%;margin-top: 3%;font-size: 18px;">
+	    <label for="Accuracy">Accuracy &nbsp :-&nbsp&nbsp </label>{{model['accuracy']}}
+	</div>
+
+
+{%endif%}
 {% endblock %}
 
 {% block footer %}
