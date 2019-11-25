@@ -1,5 +1,6 @@
 import os
 import time
+import calendar
 import datetime
 from flask_paginate import Pagination, get_page_parameter
 import sqlite3 as sql
@@ -183,7 +184,12 @@ def linear_regression_parameters():
         file = request.files['training_data']
         model_name = request.form['model_name']
         if file:
+            ts = calendar.timegm(time.gmtime())
             filename = secure_filename(file.filename)
+            temp_index=filename.find(".")
+            temp_filename=filename[0:temp_index]
+            extension=filename[temp_index:]
+            filename=temp_filename+str(ts)+extension
             uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],session['username'])
             file.save(os.path.join(uploads_dir,filename))
             model_filename = LinearRegressionImplementation(model_name,filename)
@@ -197,7 +203,8 @@ def LinearRegressionImplementation(model_name,file):
     y = dataset.iloc[:, -1].values
     linearRegressor = LinearRegression()
     linearRegressor.fit(x, y)
-    model_filename = model_name + '.sav'
+    ts = calendar.timegm(time.gmtime())
+    model_filename = model_name+str(ts) + '.sav'
     pickle_dir = os.path.join(app.config['PICKLE_FOLDER'],session['username'])
     pickle.dump(linearRegressor, open((os.path.join(pickle_dir,model_filename)), 'wb'))
     y_pred = linearRegressor.predict(x)
@@ -283,7 +290,8 @@ def LogisticRegressionImplementation(model_name,file,max_iter):
     print(y)
     classifier = LogisticRegression(max_iter=max_iter)
     classifier.fit(x, y)
-    model_filename = model_name + '.sav'
+    ts = calendar.timegm(time.gmtime())
+    model_filename = model_name+str(ts) + '.sav'
     pickle_dir = os.path.join(app.config['PICKLE_FOLDER'],session['username'])
     pickle.dump(classifier, open((os.path.join(pickle_dir,model_filename)), 'wb'))
     y_pred = classifier.predict(x)
