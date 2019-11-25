@@ -16,6 +16,10 @@
     <a href="{{ url_for('static', filename='pickle/' + session['username'] + '/' + model['filename']) }}">
     {{ model['filename'] }}</a>
 
+<p>
+	<a class="btn btn-primary" href="{{ url_for('test_model', model_id=model['id']) }}">Test this model</a>
+</p>
+
 {% endblock %}
 
 {% block footer %}
