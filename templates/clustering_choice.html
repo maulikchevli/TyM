@@ -13,13 +13,13 @@
 {% block middle %}
 
 <form method="POST" action="{{ url_for('clustering_choice') }}">
-  <div class="radio">
+  <div class="radio" style="margin: 10px 0px 0px 20px;">
   <label><input type="radio" name="clustering_choice" value="k_means" checked>K Means</label>
 </div>
-<div class="radio">
+<div class="radio" style="margin: 10px 0px 0px 20px;">
   <label><input type="radio" name="clustering_choice" value="k_mediod">K Medoid</label>
 </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" style="margin: 10px 0px 0px 20px;">Submit</button>
 </form>
 
 
