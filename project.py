@@ -141,7 +141,16 @@ def register():
 
 @app.route('/test_model/<model_id>', methods=['POST', 'GET'])
 def test_model(model_id):
-	return "Test model"
+	if request.method == 'GET':
+		username = session['username']
+		with sql.connect("database.db") as con:
+			con.row_factory = dict_factory
+			cur = con.cursor()
+			cur.execute("SELECT * FROM ml_models WHERE id=?",(model_id,))
+			model = cur.fetchone()
+		return render_template('test_model.html', model=model)
+	else:
+		pass
 
 @app.route('/model_choice',methods = ['POST','GET'])
 def model_choice():
