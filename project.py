@@ -17,19 +17,10 @@ import pickle
 
 app = Flask(__name__)
 app.secret_key = "super secret key"
-UPLOAD_FOLDER = './static/uploads'
-PICKLE_FOLDER = './static/pickle'
+UPLOAD_FOLDER = './uploads'
+PICKLE_FOLDER = './pickle'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['PICKLE_FOLDER'] = PICKLE_FOLDER
-
-def login_required(f):
-	@wraps(f)
-	def fn( *args, **kwargs):
-		if 'username' not in session:
-			session["flashErr"] = "Please login first!"
-			return redirect( url_for('login'))
-		return f( *args, **kwargs)
-	return fn
 
 
 def dict_factory(cursor,row):
@@ -83,7 +74,6 @@ def login():
 
 
 @app.route('/logout')
-@login_required
 def logout():
     session.pop('username',None)
     return redirect(url_for('index'))
@@ -140,7 +130,6 @@ def register():
                     return redirect(url_for('index'))
 
 @app.route('/model_choice',methods = ['POST','GET'])
-@login_required
 def model_choice():
     if request.method == "GET":
         return render_template('model_choice.html')
@@ -155,7 +144,6 @@ def model_choice():
 
 
 @app.route('/regression_choice',methods = ['POST','GET'])
-@login_required
 def regression_choice():
     if request.method == "GET":
         return render_template('regression_choice.html')
@@ -165,19 +153,16 @@ def regression_choice():
             return render_template('linear_regression_parameters.html')
 
 @app.route('/classification_choice',methods = ['POST','GET'])
-@login_required
 def classification_choice():
     if request.method == "GET":
         return render_template('classification_choice.html')
 
 @app.route('/clustering_choice',methods = ['POST','GET'])
-@login_required
 def clustering_choice():
     if request.method == "GET":
         return render_template('clustering_choice.html')
 
 @app.route('/linear_regression_parameters',methods=['POST','GET'])
-@login_required
 def linear_regression_parameters():
     if request.method == "GET":
         return render_template('linear_regression_parameters.html')
@@ -196,7 +181,7 @@ def LinearRegressionImplementation(model_name,file):
     uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],session['username'])
     dataset = pandas.read_csv(os.path.join(uploads_dir,file))
     x = dataset.iloc[:, :-1].values
-    y = dataset.iloc[:, 1].values
+    y = dataset.iloc[:, -1].values
     linearRegressor = LinearRegression()
     linearRegressor.fit(x, y)
     model_filename = model_name + '.sav'
@@ -214,16 +199,29 @@ def LinearRegressionImplementation(model_name,file):
         con.commit()
     return model_filename
 
-@app.route('/history')
-def history():
-    username = session['username']
+
+def TestLinearRegression(model_name,file):
+    model_algo = "linear_regression"
+    uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],session['username'])
+    dataset = pandas.read_csv(os.path.join(uploads_dir,file))
+    x = dataset.iloc[:, :-1].values
+    y = dataset.iloc[:, -1].values
+    linearRegressor = LinearRegression()
+    model_filename = model_name + '.sav'
+    pickle_dir = os.path.join(app.config['PICKLE_FOLDER'],session['username'])
+    pickle.dump(linearRegressor, open((os.path.join(pickle_dir,model_filename)), 'wb'))
+    y_pred = linearRegressor.predict(x)
+    pm = metrics.mean_absolute_error(y, y_pred)
+    print('Mean Absolute Error:', pm)
+    print('Mean Squared Error:', metrics.mean_squared_error(y, y_pred))
+    print('Root Mean Squared Error:', numpy.sqrt(metrics.mean_squared_error(y, y_pred)))
     with sql.connect("database.db") as con:
         con.row_factory = dict_factory
         cur = con.cursor()
-        cur.execute("SELECT * FROM ml_models WHERE username=?",(username,))
-        models = cur.fetchall()
-        print(models)
-        return render_template('history.html',models=models)
+        cur.execute("INSERT INTO ml_models (username,model_name,model_algo,filename,performance_measure) VALUES (?,?,?,?,?)",(session['username'],model_name,model_algo,model_filename,str(pm)))
+        con.commit()
+    return model_filename
+
 
 
 
