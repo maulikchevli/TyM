@@ -12,6 +12,7 @@ import matplotlib.pyplot as plot
 import pandas
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
 import pickle
 
@@ -156,6 +157,10 @@ def regression_choice():
 def classification_choice():
     if request.method == "GET":
         return render_template('classification_choice.html')
+    else:
+        classification_choice = request.form['classification_choice']
+        if classification_choice == "logistic_regression":
+            return render_template('logistic_regression_parameters.html')
 
 @app.route('/clustering_choice',methods = ['POST','GET'])
 def clustering_choice():
@@ -242,8 +247,48 @@ def model_info(model_id):
                 cur = con.cursor()
                 cur.execute("SELECT * FROM ml_models WHERE id=?",(model_id,))
                 model = cur.fetchone()
+        return render_template('model_info.html', model=model)
 
-                return render_template('model_info.html', model=model)
+
+@app.route('/logistic_regression_parameters',methods=['POST','GET'])
+@login_required
+def logistic_regression_parameters():
+    if request.method == "GET":
+        return render_template('logistic_regression_parameters.html')
+    else:
+        file = request.files['training_data']
+        model_name = request.form['model_name']
+        max_iter = request.form['max_iter']
+        if file:
+            filename = secure_filename(file.filename)
+            uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],session['username'])
+            file.save(os.path.join(uploads_dir,filename))
+            model_filename = LogisticRegressionImplementation(model_name,filename,int(max_iter))
+            return redirect(url_for('index'))
+
+def LogisticRegressionImplementation(model_name,file,max_iter):
+    model_algo = "logistic_regression"
+    uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],session['username'])
+    dataset = pandas.read_csv(os.path.join(uploads_dir,file))
+    x = dataset.iloc[:, :-1].values
+    y = dataset.iloc[:, -1].values
+    print(y)
+    classifier = LogisticRegression(max_iter=max_iter)
+    classifier.fit(x, y)
+    model_filename = model_name + '.sav'
+    pickle_dir = os.path.join(app.config['PICKLE_FOLDER'],session['username'])
+    pickle.dump(classifier, open((os.path.join(pickle_dir,model_filename)), 'wb'))
+    y_pred = classifier.predict(x)
+    pm = metrics.mean_absolute_error(y, y_pred)
+    print('Mean Absolute Error:', pm)
+    print('Mean Squared Error:', metrics.mean_squared_error(y, y_pred))
+    print('Root Mean Squared Error:', numpy.sqrt(metrics.mean_squared_error(y, y_pred)))
+    with sql.connect("database.db") as con:
+        con.row_factory = dict_factory
+        cur = con.cursor()
+        cur.execute("INSERT INTO ml_models (username,model_name,model_algo,filename,performance_measure) VALUES (?,?,?,?,?)",(session['username'],model_name,model_algo,model_filename,str(pm)))
+        con.commit()
+    return model_filename
 
 
 if __name__ == "__main__":
