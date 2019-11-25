@@ -45,10 +45,14 @@ def index():
     if request.method == 'GET' :
         logged = False
         username = ""
+        pro=False
         if 'username' in session:
             username = session['username']
             logged = True
-        return render_template('index.html',logged=logged,username=username)
+            if 'user_type' in session:
+                if session['user_type'] == "pro":
+                    pro=True
+        return render_template('index.html',logged=logged,username=username,pro=pro)
 
 
 @app.route('/login',methods=['POST','GET'])
@@ -69,10 +73,11 @@ def login():
 
                 storedPassword = data[0]['password'] #Throws IndexError if no entry is found
                 username = data[0]['username']
-
+                user_type=data[0]['user_type']
 
                 if passHash.verify(password,storedPassword):
                         session['username'] = username
+                        session['user_type'] = user_type
                         return redirect(url_for('index'))
 
                 else:
@@ -139,6 +144,7 @@ def register():
             con.close()
             if registered:
                     session['username'] = username
+                    session['user_type'] = "std"
                     return redirect(url_for('index'))
 
             elif alreadyUser:
