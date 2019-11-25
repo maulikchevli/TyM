@@ -224,13 +224,15 @@ def LinearRegressionImplementation(model_name,file):
     return model_filename
 
 
-def TestLinearRegression(model_name,file):
+def TestLinearRegression(pickle_filename,file):
     model_algo = "linear_regression"
     uploads_dir = os.path.join(app.config['UPLOAD_FOLDER'],session['username'])
     dataset = pandas.read_csv(os.path.join(uploads_dir,file))
     x = dataset.iloc[:, :-1].values
     y = dataset.iloc[:, -1].values
     linearRegressor = LinearRegression()
+    
+    
     
     y_pred = linearRegressor.predict(x)
     pm = metrics.mean_absolute_error(y, y_pred)
