@@ -166,6 +166,7 @@ def test_model(model_id):
 		return render_template('test_result.html',model=model)
 
 @app.route('/model_choice',methods = ['POST','GET'])
+@login_required
 def model_choice():
     if request.method == "GET":
         return render_template('model_choice.html')
