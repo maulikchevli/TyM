@@ -222,6 +222,17 @@ def TestLinearRegression(model_name,file):
         con.commit()
     return model_filename
 
+@app.route('/history')
+def history():
+    username = session['username']
+    with sql.connect("database.db") as con:
+        con.row_factory = dict_factory
+        cur = con.cursor()
+        cur.execute("SELECT * FROM ml_models WHERE username=?",(username,))
+        models = cur.fetchall()
+        print(models)
+        return render_template('history.html',models=models)
+
 
 @app.route('/model_info/<model_id>')
 def model_info(model_id):
