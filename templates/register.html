@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 
+{% block css %}
+<style type="text/css">
+.form-group
+{
+  margin: 20px 0px 0px 20px;
+}
+
+</style>
+
+{% endblock %}
+
 {% block jscript %}
 <script>
 function match(){
@@ -51,7 +62,7 @@ function match(){
     <label for="confirm_password">Confirm Password:</label>
     <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required>
   </div>
-  <button type="submit" class="btn btn-primary" >Register</button>
+  <button type="submit" class="btn btn-primary" style="margin: 20px 0px 0px 20px;">Register</button>
 </form>
 
 

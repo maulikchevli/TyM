@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 
+{% block css %}
+<style type="text/css">
+.form-group
+{
+  margin: 20px 0px 0px 20px;
+}
 
+</style>
+
+{% endblock %}
 
 {% block header %}
 
@@ -21,7 +30,7 @@
     <label for="password">Password</label>
     <input type="password" name="password" class="form-control" placeholder="Password" required>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" style="margin: 20px 0px 0px 20px;">Submit</button>
 </form>
 
 
