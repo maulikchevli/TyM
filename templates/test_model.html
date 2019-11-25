@@ -10,8 +10,8 @@
 <h1>Testing model {{model['model_name']}}</h1>
 <form method="POST" action="{{ url_for('test_model', model_id=model['id']) }}">
   <div class="custom-file" style="margin: 10px 20px 0px 20px;width: 97%">
-    <input type="file" class="custom-file-input" name="training_data">
-    <label class="custom-file-label" for="training_data">Choose file</label>
+    <input type="file" class="custom-file-input" name="test_data">
+    <label class="custom-file-label" for="test_data">Choose Test data file</label>
   </div>
   <button type="submit" class="btn btn-primary" style="margin: 10px 0px 0px 20px;">Submit</button>
 </form>
