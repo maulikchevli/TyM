@@ -153,23 +153,25 @@ def register():
 @app.route('/test_model/<model_id>', methods=['POST', 'GET'])
 def test_model(model_id):
 	if request.method == 'GET':
-		username = session['username']
-		with sql.connect("database.db") as con:
-			con.row_factory = dict_factory
-			cur = con.cursor()
-			cur.execute("SELECT * FROM ml_models WHERE id=?",(model_id,))
-			model = cur.fetchone()
-		return render_template('test_model.html', model=model)
+                username = session['username']
+                flag = 0
+                with sql.connect("database.db") as con:
+                        con.row_factory = dict_factory
+                        cur = con.cursor()
+                        cur.execute("SELECT * FROM ml_models WHERE id=?",(model_id,))
+                        model = cur.fetchone()
+                return render_template('test_model.html', model=model,flag=flag)
 	else:
-		file = request.files['test_data']
-		with sql.connect("database.db") as con:
-			con.row_factory = dict_factory
-			cur = con.cursor()
-			cur.execute("SELECT * FROM ml_models WHERE id=?",(model_id,))
-			model = cur.fetchone()
-		accuracy = TestModelFunction(model['filename'],file)
-		model['accuracy'] = accuracy
-		return render_template('test_result.html',model=model)
+                file = request.files['test_data']
+                with sql.connect("database.db") as con:
+                        con.row_factory = dict_factory
+                        cur = con.cursor()
+                        cur.execute("SELECT * FROM ml_models WHERE id=?",(model_id,))
+                        model = cur.fetchone()
+                accuracy = TestModelFunction(model['filename'],file)
+                model['accuracy'] = accuracy
+                flag = 1
+                return render_template('test_model.html',model=model,flag=flag)
 
 @app.route('/model_choice',methods = ['POST','GET'])
 @login_required
