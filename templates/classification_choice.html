@@ -12,6 +12,12 @@
 
 {% block middle %}
 
+<div class="jumbotron">
+
+<h1>Classification</h1>
+<p>Classification is used to predict to which category a data tuple belongs</p>
+<p><b>Choose among the following algorithms:</b></p>
+
 <form method="POST" action="{{ url_for('classification_choice') }}">
   <div class="radio" style="margin: 10px 0px 0px 20px;">
   <label><input type="radio" name="classification_choice" value="logistic_regression" checked>Logistic Regression</label>
@@ -21,6 +27,7 @@
 </div>
   <button type="submit" class="btn btn-primary" style="margin: 10px 0px 0px 20px;">Submit</button>
 </form>
+</div>
 
 
 {% endblock %}

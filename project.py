@@ -78,15 +78,17 @@ def login():
                 if passHash.verify(password,storedPassword):
                         session['username'] = username
                         session['user_type'] = user_type
+                        session['flashMsg'] = 'Welcome'
                         return redirect(url_for('index'))
 
                 else:
-                        return render_template('register.html',wrongPassword = True,userNotFound=False)
+                        session['flashErr'] = 'Wrong password or email'
+                        return render_template('login.html',wrongPassword = True,userNotFound=False)
 
                 con.close()
 
         except IndexError as es:
-            return render_template('login.html',userNotFound = True,wrongPassword=False)
+            return render_template('register.html',userNotFound = True,wrongPassword=False)
 
 
 @app.route('/logout')
@@ -392,6 +394,19 @@ def related_model_option():
             cur.execute("SELECT * FROM ml_models WHERE model_algo=?",(choice,))
             model_list = cur.fetchall()
         return render_template('list_related_model.html',model_list=model_list)
+
+@app.route('/update_to_pro')
+def update_to_pro():
+    username = session['username']
+    session['user_type']='pro'
+    with sql.connect("database.db") as con:
+        con.row_factory = dict_factory
+        cur = con.cursor()
+        cur.execute("UPDATE users SET user_type='pro' WHERE username=?",(username,))
+        con.commit()
+        return redirect(url_for('index'))
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

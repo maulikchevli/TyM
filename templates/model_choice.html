@@ -11,21 +11,31 @@
 {% endblock %}
 
 {% block middle %}
+<div class="jumbotron">
+
+<h1>Model Choice</h1>
+<p>Choose the choice of machine learning model you want to use</p>
 
 <form method="POST" action="{{ url_for('model_choice') }}">
   <div class="radio" style="margin: 10px 0px 0px 20px;">
-  <label><input type="radio" name="model_choice" value="regression" checked>Regression</label>
+  <label><input type="radio" name="model_choice" value="regression" checked><b>Regression.</b>
+Regression is used to predict real values of the dependent entity in data tuple
+  </label>
 </div>
 <div class="radio" style="margin: 10px 0px 0px 20px;">
-  <label><input type="radio" name="model_choice" value="classification">Classification</label>
+  <label><input type="radio" name="model_choice" value="classification"><b>Classification.</b>
+Classification is used to predict to which category a data tuple belongs
+  </label>
 </div>
 <div class="radio" style="margin: 10px 0px 0px 20px;">
-  <label><input type="radio" name="model_choice" value="clustering">Clustering</label>
+  <label><input type="radio" name="model_choice" value="clustering"><b>Clustering.</b>
+  Clustering is used to 'cluster' the data set into small groups
+  </label>
 </div>
   <button type="submit" class="btn btn-primary" style="margin: 10px 0px 0px 20px;">Submit</button>
 </form>
 
-
+</div>
 {% endblock %}
 
 {% block footer %}
