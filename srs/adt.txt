@@ -1,0 +1,52 @@
+Stack ADT
+
+    Collection: elements of some proper type T
+    Operations:
+
+        void push (T t)
+        void pop ()
+        T top ()
+        bool empty ()
+        unsigned int size ()
+        constructor and destructor
+
+    	
+
+	Axioms: (for any stack S)
+
+		S.size(), S.empty(), S.push(t) are always defined
+		S.pop() and S.top() are defined iff S.empty() is false
+		S.empty(), S.size(), S.top() do not change S
+		S.empty() is true iff 0 = S.size()
+		S.push(t) followed by S.pop() leaves S unchanged
+		after S.push(t), S.top() returns t
+		S.push(t) increases S.size() by 1
+		S.pop() decreases S.size() by 1
+
+
+Queue ADT
+
+    Collection: elements of some proper type T
+    Operations:
+
+        void push (T t)
+        void pop ()
+        T front ()
+        bool empty ()
+        unsigned int size ()
+        (plus constructor and destructor)
+
+
+
+	Axioms: (for any Queue Q)
+
+		Q.size(), Q.empty(), Q.push(t) are always defined
+		Q.pop() and Q.front() are defined iff Q.empty() is false
+		Q.empty(), Q.size(), Q.front() do not change Q
+		Q.empty() is true iff 0 = Q.size()
+		Suppose n = Q.size() and the next element pushed onto Q is t;
+		then, after n elements have been popped from Q, t = Q.front()
+		Q.push(t) increases Q.size() by 1
+		Q.pop() decreases Q.size() by 1
+		If t = Q.front() then Q.pop() removes t from Q
+
