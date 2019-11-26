@@ -395,5 +395,18 @@ def related_model_option():
             model_list = cur.fetchall()
         return render_template('list_related_model.html',model_list=model_list)
 
+@app.route('/update_to_pro')
+def update_to_pro():
+    username = session['username']
+    session['user_type']='pro'
+    with sql.connect("database.db") as con:
+        con.row_factory = dict_factory
+        cur = con.cursor()
+        cur.execute("UPDATE users SET user_type='pro' WHERE username=?",(username,))
+        con.commit()
+        return redirect(url_for('index'))
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)

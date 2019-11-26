@@ -36,6 +36,13 @@
 	    <div class="nav-item">
 	      <a class="nav-link" href="{{ url_for('history') }}">History</a>
 	    </div>
+
+      {% if pro == False %}
+        <div class="nav-item">
+          <a class="nav-link" href="{{ url_for('update_to_pro') }}">Update To Pro</a>
+        </div>
+      {% endif %}
+
     {% endif %}
 
     {% if pro == True %}
