@@ -15,7 +15,7 @@
 %Also based on the template of Karl E. Wiegers
 %http://www.se.rit.edu/~emad/teaching/slides/srs_template_sep14.pdf
 %http://karlwiegers.com
-\documentclass{scrreprt}
+\documentclass[12pt]{scrreprt}
 \usepackage[final]{pdfpages}
 \usepackage{listings}
 \usepackage{underscore}
@@ -23,6 +23,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage[final]{pdfpages}
+\usepackage{mathptmx}
+
+\usepackage{sectsty}
+\allsectionsfont{\rmfamily}
+
+
 \hypersetup{
     bookmarks=false,    % show bookmarks bar?
     pdftitle={Software Requirement Specification},    % title
@@ -45,6 +51,8 @@
 %% Headers
 
 \usepackage{hyperref}
+\usepackage{indentfirst}
+
 \begin{document}
 
 \begin{flushright}
@@ -89,7 +97,7 @@
 TyM is a software designed for generating and testing various Machine Learning models. It gives you a Machine Learning Model as an output which you can instantly use for prediction. This is the first version of this software, hence this document would specify the requirements of TyM 1.0. All the functionalities that have been implemented are covered in this SRS document.
 
 \section{Document Conventions}
-The font used while writing this document is Arial and the size is 12 points. For the functional requirements, the default priority is medium if not specified. No inheritance of any kind takes place among the high level requirements and the detailed requirements.
+The font used while writing this document is Times New Roman and the size is 12 points. For the functional requirements, the default priority is medium if not specified. No inheritance of any kind takes place among the high level requirements and the detailed requirements.
 
 \section{Intended Audience and Reading Suggestions}
 This document is primarily intended for developers and project managers who want to use Machine Learning models in their projects but don't have the time to implement them. This document is also for users who want to have a ready made Machine Learning model. The Organization of this document is as follows: Chapter 1 Introduction gives the introduction to this document; Chapter 2 Overall Description gives the high level explanation of the software, its functions and characteristics; Chapter 3 External Interface Requirements will give the information about various interfaces; Chapter 4 System Features will give detailed explanation of the features of the software; Chapter 5 Other Nonfunctional Requirements will give the overview of the Non functional requirements.
