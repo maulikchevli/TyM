@@ -12,6 +12,11 @@
 
 {% block middle %}
 
+<div class="jumbotron">
+<h1>Regression</h1>
+<p>Regression is used to predict real values of the dependent entity in data tuple</p>
+<p><b>Choose among the following algorithms:</b></p>
+
 <form method="POST" action="{{ url_for('regression_choice') }}">
   <div class="radio" style="margin: 10px 0px 0px 20px;">
   <label><input type="radio" name="regression_choice" value="linear_regression" checked>Linear Regression</label>
@@ -21,7 +26,7 @@
 </div>
   <button type="submit" class="btn btn-primary" style="margin: 10px 0px 0px 20px;">Submit</button>
 </form>
-
+</div>
 
 {% endblock %}
 
