@@ -1,10 +1,10 @@
 # TyM: Test Your Model
-TyM (pronounced as Tim) is a tool to test Machine Learning Model.
+TyM (pronounced as Tim) is a tool to test Machine Learning Model. It is a  software to generate and test ML models according to user input.
 
-## Problem Statement
-A software for generation and testing of ML models according to user input. A software for generation and testing of ML models according to user input.
+This project is part of Software Enginnering course.
 
-## Requirements
+It is inspired by [DeepXplore](https://github.com/peikexin9/deepxplore).
+
 
 ## Technologies
 ### Web front end
